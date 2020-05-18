@@ -8,11 +8,7 @@ import me.zeroeightsix.kami.event.events.PacketEvent
 import me.zeroeightsix.kami.module.Module
 import me.zeroeightsix.kami.util.MessageSendHelper
 import net.minecraft.network.play.server.SPacketChat
-import java.io.BufferedReader
-import java.io.FileNotFoundException
-import java.io.InputStreamReader;
-import java.io.FileInputStream;
-import java.io.IOException
+import java.io.*
 
 @Module.Info(
         name = "LoginMessage",

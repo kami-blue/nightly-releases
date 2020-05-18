@@ -20,12 +20,16 @@ import me.zeroeightsix.kami.util.MessageSendHelper
 )
 class DiscordRPC : Module() {
     private val coordsConfirm = register(Settings.b("Coords Confirm", false))
+
     @JvmField
     var line1Setting: Setting<LineInfo> = register(Settings.e("Line 1 Left", LineInfo.VERSION)) // details left
+
     @JvmField
     var line3Setting: Setting<LineInfo> = register(Settings.e("Line 1 Right", LineInfo.USERNAME)) // details right
+
     @JvmField
     var line2Setting: Setting<LineInfo> = register(Settings.e("Line 2 Left", LineInfo.SERVER_IP)) // state left
+
     @JvmField
     var line4Setting: Setting<LineInfo> = register(Settings.e("Line 2 Right", LineInfo.HEALTH)) // state right
 

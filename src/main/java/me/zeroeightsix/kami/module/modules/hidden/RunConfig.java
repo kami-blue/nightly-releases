@@ -4,7 +4,6 @@ import me.zeroeightsix.kami.module.Module;
 import me.zeroeightsix.kami.module.modules.capes.Capes;
 import me.zeroeightsix.kami.module.modules.client.*;
 import me.zeroeightsix.kami.module.modules.misc.DiscordRPC;
-import me.zeroeightsix.kami.module.modules.render.TabFriends;
 import me.zeroeightsix.kami.setting.Setting;
 import me.zeroeightsix.kami.setting.Settings;
 

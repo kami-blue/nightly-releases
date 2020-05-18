@@ -25,6 +25,7 @@ import net.minecraftforge.client.event.InputUpdateEvent
 class NoSlowDown : Module() {
     @JvmField
     var soulSand: Setting<Boolean> = register(Settings.b("Soul Sand", true))
+
     @JvmField
     var cobweb: Setting<Boolean> = register(Settings.b("Cobweb", true))
     private val slime = register(Settings.b("Slime", true))

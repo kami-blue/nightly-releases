@@ -19,6 +19,7 @@ class Chams : Module() {
         private val players = Settings.b("Players", true)
         private val animals = Settings.b("Animals", false)
         private val mobs = Settings.b("Mobs", false)
+
         @JvmStatic
         fun renderChams(entity: Entity?): Boolean {
             return if (entity is EntityPlayer) players.value else if (EntityUtil.isPassive(entity)) animals.value else mobs.value

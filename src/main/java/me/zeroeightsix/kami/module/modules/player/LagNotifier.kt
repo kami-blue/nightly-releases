@@ -3,18 +3,15 @@ package me.zeroeightsix.kami.module.modules.player
 import me.zero.alpine.listener.EventHandler
 import me.zero.alpine.listener.EventHook
 import me.zero.alpine.listener.Listener
-import me.zeroeightsix.kami.KamiMod
 import me.zeroeightsix.kami.event.events.PacketEvent.Receive
 import me.zeroeightsix.kami.gui.kami.DisplayGuiScreen
 import me.zeroeightsix.kami.module.Module
-import me.zeroeightsix.kami.module.modules.client.Baritone
 import me.zeroeightsix.kami.setting.Settings
+import me.zeroeightsix.kami.util.BaritoneUtils
 import me.zeroeightsix.kami.util.MathsUtils
 import me.zeroeightsix.kami.util.WebHelper
 import me.zeroeightsix.kami.util.Wrapper
 import net.minecraft.client.gui.GuiChat
-import baritone.api.BaritoneAPI
-import me.zeroeightsix.kami.util.BaritoneUtils
 
 /**
  * @author dominikaaaa
@@ -38,7 +35,7 @@ class LagNotifier : Module() {
 
     override fun onRender() {
         if (mc.currentScreen != null && mc.currentScreen !is GuiChat) return
-        if (1000L *  timeout.value.toDouble() > System.currentTimeMillis() - serverLastUpdated) {
+        if (1000L * timeout.value.toDouble() > System.currentTimeMillis() - serverLastUpdated) {
             isLagging = false
 
             if (pauseDuringLag.value) {
@@ -64,8 +61,7 @@ class LagNotifier : Module() {
 
         isLagging = true
 
-        if (pauseDuringLag.value)
-        {
+        if (pauseDuringLag.value) {
             BaritoneUtils.pause()
         }
     }

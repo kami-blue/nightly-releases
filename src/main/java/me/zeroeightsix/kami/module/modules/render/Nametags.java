@@ -1,6 +1,5 @@
 package me.zeroeightsix.kami.module.modules.render;
 
-import me.zeroeightsix.kami.KamiMod;
 import me.zeroeightsix.kami.event.events.RenderEvent;
 import me.zeroeightsix.kami.module.Module;
 import me.zeroeightsix.kami.setting.Setting;
@@ -121,9 +120,11 @@ public class Nametags extends Module {
         GlStateManager.enableTexture2D();
 
         GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
-        if (!entityIn.isSneaking()) fontRendererIn.drawString(str, -i, 10, entityIn instanceof EntityPlayer ? Friends.isFriend(entityIn.getName()) ? 0x00bfff : 0xffffff : 0xffffff);
+        if (!entityIn.isSneaking())
+            fontRendererIn.drawString(str, -i, 10, entityIn instanceof EntityPlayer ? Friends.isFriend(entityIn.getName()) ? 0x00bfff : 0xffffff : 0xffffff);
         else fontRendererIn.drawString(str, -i, 10, 0xffaa00);
-        if (entityIn instanceof EntityPlayer && armor.getValue()) renderArmor((EntityPlayer)entityIn, 0, -(fontRendererIn.FONT_HEIGHT + 1) - 20);
+        if (entityIn instanceof EntityPlayer && armor.getValue())
+            renderArmor((EntityPlayer) entityIn, 0, -(fontRendererIn.FONT_HEIGHT + 1) - 20);
         GlStateManager.glNormal3f(0.0F, 0.0F, 0.0F);
         glTranslatef(0, 20, 0);
 
@@ -142,19 +143,17 @@ public class Nametags extends Module {
         ItemStack offHand = player.getHeldItemOffhand();
         ItemStack[] stuff = null;
         if (inHand != null && offHand != null) {
-            stuff = new ItemStack[] { inHand, helm, body, leggings, boots, offHand };
-        }
-        else if (inHand != null && offHand == null) stuff = new ItemStack[] { inHand, helm, body, leggings, boots };
-        else if (inHand == null && offHand != null) stuff = new ItemStack[] { helm, body, leggings, boots, offHand };
+            stuff = new ItemStack[]{inHand, helm, body, leggings, boots, offHand};
+        } else if (inHand != null && offHand == null) stuff = new ItemStack[]{inHand, helm, body, leggings, boots};
+        else if (inHand == null && offHand != null) stuff = new ItemStack[]{helm, body, leggings, boots, offHand};
         else {
-            stuff = new ItemStack[] { helm, body, leggings, boots };
+            stuff = new ItemStack[]{helm, body, leggings, boots};
         }
         List<ItemStack> stacks = new ArrayList();
         ItemStack[] array;
         int length = (array = stuff).length;
 
-        for (int j = 0; j < length; j++)
-        {
+        for (int j = 0; j < length; j++) {
             ItemStack i = array[j];
             if ((i != null) && (i.getItem() != null)) {
                 stacks.add(i);
@@ -163,8 +162,7 @@ public class Nametags extends Module {
         int width = 16 * stacks.size() / 2;
         x -= width;
         GlStateManager.disableDepth();
-        for (ItemStack stack : stacks)
-        {
+        for (ItemStack stack : stacks) {
             renderItem(stack, x, y);
             x += 16;
         }
@@ -235,7 +233,8 @@ public class Nametags extends Module {
         if (stack.isItemStackDamageable()) drawDamage(stack, x, y);
         GlStateManager.scale(1.33F, 1.33F, 1.33F);
         EnchantEntry[] array;
-        int length = (array = enchants).length; for (int i = 0; i < length; i++) {
+        int length = (array = enchants).length;
+        for (int i = 0; i < length; i++) {
             EnchantEntry enchant = array[i];
             int level = EnchantmentHelper.getEnchantmentLevel(enchant.getEnchant(), stack);
             String levelDisplay = "" + level;
@@ -244,7 +243,7 @@ public class Nametags extends Module {
             }
             if (level > 0) {
                 float scale2 = 0.32F;
-                GlStateManager.translate(x-1, y + 2, 0.0F);
+                GlStateManager.translate(x - 1, y + 2, 0.0F);
                 GlStateManager.scale(0.42F, 0.42F, 0.42F);
                 GlStateManager.disableDepth();
                 GlStateManager.disableLighting();
@@ -255,8 +254,8 @@ public class Nametags extends Module {
                 GlStateManager.enableLighting();
                 GlStateManager.enableDepth();
                 GlStateManager.scale(2.42F, 2.42F, 2.42F);
-                GlStateManager.translate(-x+1, -y, 0.0F);
-                y += (int)((fontRenderer.FONT_HEIGHT + 3) * 0.28F);
+                GlStateManager.translate(-x + 1, -y, 0.0F);
+                y += (int) ((fontRenderer.FONT_HEIGHT + 3) * 0.28F);
             }
         }
         renderItem.zLevel = 0.0F;
@@ -272,7 +271,7 @@ public class Nametags extends Module {
         float red = 1 - green;
         int dmg = 100 - (int) (red * 100);
         GlStateManager.disableDepth();
-        mc.fontRenderer.drawStringWithShadow(dmg + "", x + 8 - mc.fontRenderer.getStringWidth(dmg + "") / 2f, y-11, ColourHolder.toHex((int) (red * 255), (int) (green * 255), 0));
+        mc.fontRenderer.drawStringWithShadow(dmg + "", x + 8 - mc.fontRenderer.getStringWidth(dmg + "") / 2f, y - 11, ColourHolder.toHex((int) (red * 255), (int) (green * 255), 0));
         GlStateManager.enableDepth();
     }
 
@@ -280,19 +279,16 @@ public class Nametags extends Module {
         private Enchantment enchant;
         private String name;
 
-        public EnchantEntry(Enchantment enchant, String name)
-        {
+        public EnchantEntry(Enchantment enchant, String name) {
             this.enchant = enchant;
             this.name = name;
         }
 
-        public Enchantment getEnchant()
-        {
+        public Enchantment getEnchant() {
             return this.enchant;
         }
 
-        public String getName()
-        {
+        public String getName() {
             return this.name;
         }
     }

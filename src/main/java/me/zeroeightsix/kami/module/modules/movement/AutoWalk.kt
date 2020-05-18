@@ -53,7 +53,9 @@ class AutoWalk : Module() {
     public override fun onEnable() {
         if (mode.value != AutoWalkMode.BARITONE) return
 
-        if (mc.player == null) { disable(); return }
+        if (mc.player == null) {
+            disable(); return
+        }
 
         when (MathsUtils.getPlayerCardinal(mc)!!) {
             Cardinal.POS_Z -> BaritoneAPI.getProvider().primaryBaritone.customGoalProcess.setGoalAndPath(GoalXZ(mc.player.posX.toInt(), mc.player.posZ.toInt() + border))

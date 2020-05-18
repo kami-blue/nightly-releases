@@ -122,7 +122,7 @@ class ElytraReplace : Module() {
         return mc.player.onGround
     }
 
-    private fun isBroken(i : Int): Boolean { // (100 * damage / max damage) >= (100 - 70)
+    private fun isBroken(i: Int): Boolean { // (100 * damage / max damage) >= (100 - 70)
         return if (mc.player.inventory.getStackInSlot(i).maxDamage == 0) {
             false
         } else {
@@ -130,7 +130,7 @@ class ElytraReplace : Module() {
         }
     }
 
-    private fun isBrokenArmor(i : Int): Boolean { // (100 * damage / max damage) >= (100 - 70)
+    private fun isBrokenArmor(i: Int): Boolean { // (100 * damage / max damage) >= (100 - 70)
         return if (mc.player.inventory.armorInventory[i].maxDamage == 0) {
             false
         } else {

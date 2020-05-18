@@ -19,14 +19,24 @@ import java.util.function.Function;
 )
 public class Brightness extends Module {
 
+    private static float currentBrightness = 0;
+    private static boolean inTransition = false;
     private Setting<Boolean> transition = register(Settings.b("Transition", true));
     private Setting<Float> seconds = register(Settings.floatBuilder("Seconds").withMinimum(0f).withMaximum(10f).withValue(5f).withVisibility(o -> transition.getValue()).build());
     private Setting<Transition> mode = register(Settings.enumBuilder(Transition.class).withName("Mode").withValue(Transition.SINE).withVisibility(o -> transition.getValue()).build());
-
     private Stack<Float> transitionStack = new Stack<>();
 
-    private static float currentBrightness = 0;
-    private static boolean inTransition = false;
+    public static float getCurrentBrightness() {
+        return currentBrightness;
+    }
+
+    public static boolean isInTransition() {
+        return inTransition;
+    }
+
+    public static boolean shouldBeActive() {
+        return isInTransition() || currentBrightness == 1; // if in transition or enabled
+    }
 
     private void addTransition(boolean isUpwards) {
         if (transition.getValue()) {
@@ -101,20 +111,8 @@ public class Brightness extends Module {
         return createTransition(length, polarity, this::sine);
     }
 
-    public static float getCurrentBrightness() {
-        return currentBrightness;
-    }
-
-    public static boolean isInTransition() {
-        return inTransition;
-    }
-
-    public static boolean shouldBeActive() {
-        return isInTransition() || currentBrightness == 1; // if in transition or enabled
-    }
-
     public enum Transition {
-        LINEAR, SINE;
+        LINEAR, SINE
 
     }
 }

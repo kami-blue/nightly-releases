@@ -26,9 +26,10 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent
 )
 class AutoEZ : Module() {
     @JvmField
-	var mode: Setting<Mode> = register(Settings.e("Mode", Mode.ONTOP))
+    var mode: Setting<Mode> = register(Settings.e("Mode", Mode.ONTOP))
+
     @JvmField
-	var customText: Setting<String> = register(Settings.stringBuilder("Custom Text").withValue("unchanged").withConsumer { _: String?, _: String? -> }.build())
+    var customText: Setting<String> = register(Settings.stringBuilder("Custom Text").withValue("unchanged").withConsumer { _: String?, _: String? -> }.build())
 
     private var focus: EntityPlayer? = null
     private var hasBeenCombat = 0

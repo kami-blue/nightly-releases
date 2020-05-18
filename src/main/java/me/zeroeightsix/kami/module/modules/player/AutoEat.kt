@@ -35,7 +35,7 @@ class AutoEat : Module() {
 
     private fun isValid(stack: ItemStack, food: Int): Boolean {
         return passItemCheck(stack.getItem()) && stack.getItem() is ItemFood && foodLevel.value - food >= (stack.getItem() as ItemFood).getHealAmount(stack) ||
-               passItemCheck(stack.getItem()) && stack.getItem() is ItemFood && healthLevel.value - (mc.player.health + mc.player.absorptionAmount) > 0f
+                passItemCheck(stack.getItem()) && stack.getItem() is ItemFood && healthLevel.value - (mc.player.health + mc.player.absorptionAmount) > 0f
     }
 
     private fun passItemCheck(item: Item): Boolean {
@@ -55,8 +55,7 @@ class AutoEat : Module() {
             }
             eating = false
 
-            if (MODULE_MANAGER.getModuleT(Baritone::class.java).pauseDuringAutoEat.value)
-            {
+            if (MODULE_MANAGER.getModuleT(Baritone::class.java).pauseDuringAutoEat.value) {
                 unpause()
             }
 
@@ -72,8 +71,7 @@ class AutoEat : Module() {
             mc.player.activeHand = EnumHand.OFF_HAND
             eating = true
 
-            if (MODULE_MANAGER.getModuleT(Baritone::class.java).pauseDuringAutoEat.value)
-            {
+            if (MODULE_MANAGER.getModuleT(Baritone::class.java).pauseDuringAutoEat.value) {
                 pause()
             }
 
@@ -86,8 +84,7 @@ class AutoEat : Module() {
                     mc.player.inventory.currentItem = i
                     eating = true
 
-                    if (MODULE_MANAGER.getModuleT(Baritone::class.java).pauseDuringAutoEat.value)
-                    {
+                    if (MODULE_MANAGER.getModuleT(Baritone::class.java).pauseDuringAutoEat.value) {
                         pause()
                     }
 

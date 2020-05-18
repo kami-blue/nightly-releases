@@ -21,9 +21,15 @@ import java.util.List;
         category = Module.Category.PLAYER
 )
 public class PacketLogger extends Module {
+    private static final SimpleDateFormat FORMAT = new SimpleDateFormat("HH:mm:ss.SSS");
     private final String filename = "KAMIBluePackets.txt";
     private List<String> lines = new ArrayList<>();
-    private static final SimpleDateFormat FORMAT = new SimpleDateFormat("HH:mm:ss.SSS");
+    
+    @EventHandler
+    public Listener<PacketEvent.Send> packetListener = new Listener<>(event -> {
+        if (mc.player == null) return;
+        addLine(event.getPacket());
+    });
 
     public void onEnable() {
         readToList();
@@ -32,12 +38,6 @@ public class PacketLogger extends Module {
     public void onDisable() {
         write();
     }
-
-    @EventHandler
-    public Listener<PacketEvent.Send> packetListener = new Listener<>(event -> {
-        if (mc.player == null) return;
-        addLine(event.getPacket());
-    });
 
     private void addLine(Packet packet) {
         lines.add(FORMAT.format(new Date()) + " " + packet.getClass().getSimpleName() + "\n" + packet.getClass().toString() + "\n" + packet.toString() + "\n\n");
@@ -68,6 +68,7 @@ public class PacketLogger extends Module {
                 lines.add(line);
             }
             bufferedReader.close();
-        } catch (IOException ignored) { }
+        } catch (IOException ignored) {
+        }
     }
 }

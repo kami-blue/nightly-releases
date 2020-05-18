@@ -72,10 +72,10 @@ class AntiSpam : Module() {
 
         /* leijurv's sexy lambda to remove older entries in messageHistory */
         messageHistory!!.entries
-            .stream()
-            .filter { entry: Map.Entry<String, Long> -> entry.value < System.currentTimeMillis() - 10 * 60 * 1000 } // 10 is delay in minutes
-            .collect(Collectors.toList())
-            .forEach(Consumer { entry: Map.Entry<String, Long> -> messageHistory!!.remove(entry.key) })
+                .stream()
+                .filter { entry: Map.Entry<String, Long> -> entry.value < System.currentTimeMillis() - 10 * 60 * 1000 } // 10 is delay in minutes
+                .collect(Collectors.toList())
+                .forEach(Consumer { entry: Map.Entry<String, Long> -> messageHistory!!.remove(entry.key) })
         if (isSpam(event.message.unformattedText)) {
             event.isCanceled = true
         }

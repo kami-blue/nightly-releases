@@ -130,6 +130,7 @@ class EntitySpeed : Module() {
 
     companion object {
         private val opacity = Settings.f("Boat opacity", .5f)
+
         @JvmStatic
         fun getOpacity(): Float {
             return opacity.value

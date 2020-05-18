@@ -19,6 +19,7 @@ import org.lwjgl.input.Keyboard
 )
 class InventoryMove : Module() {
     private val speed = register(Settings.i("Look speed", 10))
+
     @JvmField
     var sneak: Setting<Boolean> = register(Settings.b("Sneak", false))
 

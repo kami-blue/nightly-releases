@@ -26,6 +26,7 @@ import net.minecraft.network.play.server.SPacketChat
 class AutoReply : Module() {
     @JvmField
     var customMessage: Setting<Boolean> = register(Settings.b("Custom Message", false))
+
     @JvmField
     var message: Setting<String> = register(Settings.stringBuilder("Custom Text").withValue("Use &7" + Command.getCommandPrefix() + "autoreply&r to modify this").withConsumer { _: String?, _: String? -> }.withVisibility { customMessage.value }.build())
 

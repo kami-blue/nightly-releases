@@ -21,8 +21,7 @@ import java.util.Comparator;
         description = "Automatically remounts your horse",
         category = Module.Category.MOVEMENT
 )
-public class AutoRemount extends Module
-{
+public class AutoRemount extends Module {
     private Setting<Boolean> boat = register(Settings.b("Boats", true));
     private Setting<Boolean> horse = register(Settings.b("Horse", true));
     private Setting<Boolean> skeletonHorse = register(Settings.b("SkeletonHorse", true));
@@ -31,8 +30,7 @@ public class AutoRemount extends Module
     private Setting<Boolean> llama = register(Settings.b("Llama", true));
     private Setting<Float> range = register(Settings.floatBuilder("Range").withMinimum(1.0f).withValue(2.0f).withMaximum(10.0f).build());
 
-    public void onUpdate()
-    {
+    public void onUpdate() {
         // we don't need to do anything if we're already riding.
         if (mc.player.isRiding())
             return;
@@ -46,13 +44,11 @@ public class AutoRemount extends Module
             mc.playerController.interactWithEntity(mc.player, entity, EnumHand.MAIN_HAND);
     }
 
-    private boolean isValidEntity(Entity entity)
-    {
+    private boolean isValidEntity(Entity entity) {
         if (entity.getDistance(mc.player) > range.getValue())
             return false;
 
-        if (entity instanceof AbstractHorse)
-        {
+        if (entity instanceof AbstractHorse) {
             AbstractHorse horse = (AbstractHorse) entity;
 
             /// no animal abuse done in this module, no thanks.
@@ -72,19 +68,12 @@ public class AutoRemount extends Module
         if (entity instanceof EntityDonkey && donkey.getValue())
             return true;
 
-        if (entity instanceof EntityPig && pig.getValue())
-        {
+        if (entity instanceof EntityPig && pig.getValue()) {
             EntityPig pig = (EntityPig) entity;
 
-            if (pig.getSaddled())
-                return true;
-
-            return false;
+            return pig.getSaddled();
         }
 
-        if (entity instanceof EntityLlama && llama.getValue())
-            return true;
-
-        return false;
+        return entity instanceof EntityLlama && llama.getValue();
     }
 }

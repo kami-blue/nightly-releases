@@ -17,8 +17,10 @@ import me.zeroeightsix.kami.setting.Settings
 class HungerOverlay : Module() {
     @JvmField
     var saturationOverlay: Setting<Boolean> = register(Settings.booleanBuilder("Saturation Overlay").withValue(true).build())
+
     @JvmField
     var foodValueOverlay: Setting<Boolean> = register(Settings.booleanBuilder("Food Value Overlay").withValue(true).build())
+
     @JvmField
     var foodExhaustionOverlay: Setting<Boolean> = register(Settings.booleanBuilder("Food Exhaustion Overlay").withValue(true).build())
 }

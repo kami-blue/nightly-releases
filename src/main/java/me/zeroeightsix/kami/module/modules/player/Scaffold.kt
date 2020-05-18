@@ -142,6 +142,7 @@ class Scaffold : Module() {
 
     companion object {
         private lateinit var INSTANCE: Scaffold
+
         @JvmStatic
         fun shouldScaffold(): Boolean {
             return INSTANCE.isEnabled

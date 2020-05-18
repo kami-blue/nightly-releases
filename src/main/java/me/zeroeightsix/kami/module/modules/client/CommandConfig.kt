@@ -18,12 +18,16 @@ import me.zeroeightsix.kami.util.MessageSendHelper
 class CommandConfig : Module() {
     @JvmField
     var aliasInfo: Setting<Boolean> = register(Settings.b("Alias Info", true))
+
     @JvmField
     var prefixChat: Setting<Boolean> = register(Settings.b("Prefix Chat", true))
+
     @JvmField
     var toggleMessages: Setting<Boolean> = register(Settings.b("Toggle Messages", false))
+
     @JvmField
     var logLevel: Setting<LogLevel> = register(Settings.e("Log Level", LogLevel.ALL))
+
     @JvmField
     var customTitle: Setting<Boolean> = register(Settings.b("Window Title", true))
 

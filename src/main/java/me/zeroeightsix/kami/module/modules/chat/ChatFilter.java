@@ -75,7 +75,7 @@ public class ChatFilter extends Module {
         BufferedReader bufferedReader;
         try {
             sendChatMessage(getChatName() + "Trying to find '&7chat_filter.txt&f'");
-            bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("chat_filter.txt"), "UTF-8"));
+            bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("chat_filter.txt"), StandardCharsets.UTF_8));
             String line;
             tempLines.clear();
             while ((line = bufferedReader.readLine()) != null) {

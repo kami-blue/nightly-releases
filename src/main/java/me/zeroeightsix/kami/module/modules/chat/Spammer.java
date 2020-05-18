@@ -4,14 +4,9 @@ import me.zeroeightsix.kami.module.Module;
 import me.zeroeightsix.kami.setting.Setting;
 import me.zeroeightsix.kami.setting.Settings;
 
-import javax.management.monitor.StringMonitor;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -27,19 +22,32 @@ import static me.zeroeightsix.kami.util.MessageSendHelper.*;
         category = Module.Category.CHAT
 )
 public class Spammer extends Module {
+    private static int currentLine = 0;
+    private static long startTime = 0;
     private Setting<Mode> modeSetting = register(Settings.e("Order", Mode.RANDOM_ORDER));
     private Setting<Integer> timeoutTime = register(Settings.integerBuilder().withName("Timeout (s)").withMinimum(1).withMaximum(240).withValue(10).build());
-
     private List<String> tempLines = new ArrayList<>();
     private String[] spammer;
-    private static int currentLine = 0;
-    private enum Mode { IN_ORDER, RANDOM_ORDER }
+
+    private static String getOrdered(String[] array) {
+        currentLine++;
+        if (currentLine > array.length - 1) currentLine = 0;
+        return array[currentLine];
+    }
+
+    private static String getRandom(String[] array) {
+        int rand = new Random().nextInt(array.length);
+        while (array[rand].isEmpty() || array[rand].equals(" ")) {
+            rand = new Random().nextInt(array.length); // big meme to try to avoid sending empty messages
+        }
+        return array[rand];
+    }
 
     public void onEnable() {
         BufferedReader bufferedReader;
         try {
             sendChatMessage(getChatName() + "Trying to find '&7spammer.txt&f'");
-            bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("spammer.txt"), "UTF-8"));
+            bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("spammer.txt"), StandardCharsets.UTF_8));
             String line;
             tempLines.clear();
             while ((line = bufferedReader.readLine()) != null) {
@@ -63,7 +71,6 @@ public class Spammer extends Module {
         sendMsg();
     }
 
-    private static long startTime = 0;
     private void sendMsg() {
         String message = "";
         if (startTime == 0) startTime = System.currentTimeMillis();
@@ -82,17 +89,5 @@ public class Spammer extends Module {
         }
     }
 
-    private static String getOrdered(String[] array) {
-        currentLine++;
-        if (currentLine > array.length - 1) currentLine = 0;
-        return array[currentLine];
-    }
-
-    private static String getRandom(String[] array) {
-        int rand = new Random().nextInt(array.length);
-        while (array[rand].isEmpty() || array[rand].equals(" ")) {
-            rand = new Random().nextInt(array.length); // big meme to try to avoid sending empty messages
-        }
-        return array[rand];
-    }
+    private enum Mode {IN_ORDER, RANDOM_ORDER}
 }

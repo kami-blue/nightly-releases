@@ -34,11 +34,6 @@ public class ESP extends Module {
     private Setting<Boolean> animals = register(Settings.b("Animals", false));
     private Setting<Boolean> mobs = register(Settings.b("Mobs", false));
     private Setting<Boolean> renderInvis = register(Settings.b("Invisible", false));
-
-    public enum ESPMode {
-        RECTANGLE, GLOW
-    }
-
     private boolean removeGlow = false;
 
     @Override
@@ -115,7 +110,8 @@ public class ESP extends Module {
 
     @Override
     public void onUpdate() {
-        if (isDisabled()) return; // make sure to reset the shader stuff properly, so don't change radius while disabling
+        if (isDisabled())
+            return; // make sure to reset the shader stuff properly, so don't change radius while disabling
         if (mode.getValue().equals(ESPMode.GLOW)) {
             removeGlow = true;
             mc.renderGlobal.entityOutlineShader.listShaders.forEach(shader -> {
@@ -163,5 +159,9 @@ public class ESP extends Module {
             if (radius != null)
                 radius.set(2f); // default radius
         });
+    }
+
+    public enum ESPMode {
+        RECTANGLE, GLOW
     }
 }

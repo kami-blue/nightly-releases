@@ -17,9 +17,10 @@ import static me.zeroeightsix.kami.util.MessageSendHelper.sendChatMessage;
 
 /**
  * I see you also watch FitMC :eyes:
+ *
  * @author cookiedragon234
  * Taken from Backdoored 1.8.2 source
- *
+ * <p>
  * UUID to username method and caching methods added by dominikaaaa
  */
 @Module.Info(
@@ -29,6 +30,10 @@ import static me.zeroeightsix.kami.util.MessageSendHelper.sendChatMessage;
 )
 public class MobOwner extends Module {
 
+    /* Periodically try to re-request invalid UUIDs */
+    private static long startTime = 0;
+    /* Super safe method to limit requests to the Mojang API in case you load more then 10 different UUIDs */
+    private static long startTime1 = 0;
     private Setting<Boolean> speed = register(Settings.b("Speed", true));
     private Setting<Boolean> jump = register(Settings.b("Jump", true));
     private Setting<Boolean> hp = register(Settings.b("Health", true));
@@ -36,7 +41,8 @@ public class MobOwner extends Module {
     private Setting<Boolean> debug = register(Settings.b("Debug", true));
 
     /* First String is your key / uuid, second String is the value / username */
-    private Map<String, String> cachedUUIDs = new HashMap<String, String>(){{ }};
+    private Map<String, String> cachedUUIDs = new HashMap<String, String>() {{
+    }};
     private int apiRequests = 0;
     private String invalidText = "Offline or invalid UUID!";
 
@@ -153,8 +159,8 @@ public class MobOwner extends Module {
             }
             try {
                 entity.setAlwaysRenderNameTag(false);
+            } catch (Exception ignored) {
             }
-            catch (Exception ignored) {}
         }
     }
 }
